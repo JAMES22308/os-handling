@@ -43,6 +43,10 @@ def find_folder(directory):
         with open(added, 'a')as file:
             file.write('')
             print('added new file')
+            print('added new file')
+            print('added new file')
+            print('added new file')
+            print('added new file')
        
 def main():
     directory = '/Users/michaeljamessoria/Documents/IDLE'

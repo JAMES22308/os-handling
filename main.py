@@ -31,22 +31,46 @@ def add_folder(directory):
             file.write(f'{ask3} \n')
             print(f"'{ask3}' has been noted")
 
+
+
 def find_folder(directory):
     content = os.listdir(directory)
     for index in content:
         print(index)
 
-    ask = input('enter the folder name: ')
-    if ask in content:
-        add_file = input('add new file: ')
-        added = os.path.join(directory, ask, add_file + ".txt")
-        with open(added, 'a')as file:
-            file.write('')
-            print('added new file')
-            print('added new file')
-            print('added new file')
-            print('added new file')
-            print('added new file')
+    find_folder = input('enter the folder: ')
+    if find_folder in content:
+        content = os.listdir(find_folder)
+        print(content)
+        ask = input('press 1 to add file | press 2 to add content: ')
+        if ask == '1':
+            ask2 = input('file name: ')
+            formatted = f"{ask2}.txt"
+            file = os.path.join(find_folder, formatted)
+            note = input('note: ')
+            with open(file, 'a')as file:
+                file.write(f"{note}\n")
+                print('new file has been created')
+        elif ask == '2':
+            files = os.listdir(find_folder)
+            print(files)
+            choose_file = input('enter the file: ').lower().strip()
+            formatted_file = f"{choose_file}.txt"
+            if formatted_file in files:
+                print(formatted_file)
+                new_note = input('add note: ')
+                filelist = os.path.join(find_folder, formatted_file)
+                with open(filelist, 'a')as file:
+                    file.write(f"{new_note}\n")
+                    print('added new note')
+                with open(filelist, 'r')as file:
+                    print()
+                    print('notes:')
+                    file_content = file.read()
+                    print(file_content)
+                
+
+            
        
 def main():
     directory = '/Users/michaeljamessoria/Documents/IDLE'

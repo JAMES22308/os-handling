@@ -42,6 +42,7 @@ def find_folder(directory):
         added = os.path.join(directory, ask, add_file + ".txt")
         with open(added, 'a')as file:
             file.write('')
+            print('added new file')
        
 def main():
     directory = '/Users/michaeljamessoria/Documents/IDLE'

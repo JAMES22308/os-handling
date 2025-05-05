@@ -17,15 +17,15 @@ def display(items):
         
 
 
-def add_folder(directory):
+def add_folder(dir_folder):
     
-    if not os.path.exists(directory):
-        os.mkdir(directory)
+    if not os.path.exists(dir_folder):
+        os.mkdir(dir_folder)
     try:
         ask = input('create a folder: ')
         char = any(char in "()*&^%$#@!~`,.;':?}{[]" for char in ask )
         error = ask[0] == '/' or ask[-1] == '/'
-        fullpath = os.path.join(directory, ask)
+        fullpath = os.path.join(dir_folder, ask)
         if not os.path.exists(fullpath):
             try:
                 if not error and not char:
@@ -43,13 +43,13 @@ def add_folder(directory):
 
 
 
-def find_folder(directory):
-    if not os.path.exists(directory):
-        output = "no directory at the moment"
+def find_folder(dir_folder):
+    if not os.path.exists(dir_folder):
+        output = "no dir_folder at the moment"
         return print(output)
 
     
-    folders = os.listdir(directory)
+    folders = os.listdir(dir_folder)
     sort = sorted(folders)
     
     for index, folder in enumerate(sort, start=1):
@@ -59,7 +59,7 @@ def find_folder(directory):
     if not ask:
         print('try again')
     else:
-        fullpath = os.path.join(directory, ask)
+        fullpath = os.path.join(dir_folder, ask)
         if os.path.exists(fullpath):
             files = os.listdir(fullpath)
             if files:
@@ -76,10 +76,10 @@ def create_file_txt(prompt):
     return formatted_ask
 
 
-def create_file(directory):
+def create_file(dir_folder):
 
     try:
-        dir = os.listdir(directory)
+        dir = os.listdir(dir_folder)
         display(dir)
         ask = input('select a folder: ')
         if ask in dir:
@@ -87,12 +87,12 @@ def create_file(directory):
                 ask2 = input('press 1 new file | press 2 add content | press enter to exit: ')
                 if ask2 == '1':
                     ask3 = create_file_txt('file name: ')
-                    fullpath = os.path.join(directory, ask, ask3)
+                    fullpath = os.path.join(dir_folder, ask, ask3)
                     with open(fullpath, 'w')as file: 
                         file.write('')
                         print('new file has been created')
                 elif ask2 == '2':
-                    full = os.path.join(directory, ask)
+                    full = os.path.join(dir_folder, ask)
                     full_path = os.listdir(full)
                     
 
@@ -128,7 +128,13 @@ def create_file(directory):
             
        
 def main():
-    directory = '/Users/michaeljamessoria/Documents/IDLE/folders'
+
+    # directory = '/Users/michaeljamessoria/Documents/IDLE/folders'
+    directory = os.getcwd()
+    print(directory)
+    main_folder = 'folders'
+    dir_folder = os.path.join(directory, main_folder)
+    print(dir_folder)
 
     options = {
 
@@ -140,11 +146,11 @@ def main():
     while True:
         ask = input('press 1 new folder | press 2 find folder | press 3 new file: ').lower().strip()
         if ask == '1':
-            add_folder(directory)
+            add_folder(dir_folder)
         elif ask == '2':
-            find_folder(directory)
+            find_folder(dir_folder)
         elif ask == '3':
-            create_file(directory)
+            create_file(dir_folder)
         
 
 main()

@@ -122,10 +122,25 @@ def create_file(dir_folder):
 
 
 
-    
-            
+def delete_folder(dir_folder):
+    print(dir_folder)
 
-            
+    dir_list = os.listdir(dir_folder)
+    display(dir_list)
+    ask  = input('foldername: ')
+    if ask in dir_list:
+        print(ask)
+        merge = os.path.join(dir_folder, ask)
+        print(merge)
+        merge_list = os.listdir(merge)
+        if not merge_list:
+           os.rmdir(merge)
+           print('deleted successfully')
+        else:
+            print('there is a content inside')
+
+
+
        
 def main():
 
@@ -138,19 +153,21 @@ def main():
 
     options = {
 
-        "1": "create a folder",
+        "1": "create folder",
         "2": "find folder",
-        "3": "create a file"
+        "3": "create file",
+        "4": "delete folder"
     }
     get_list(options)
     while True:
-        ask = input('press 1 new folder | press 2 find folder | press 3 new file: ').lower().strip()
+        ask = input('press (1) new folder | press (2) find folder | press (3) new file | press (4) delete folder: ').lower().strip()
         if ask == '1':
             add_folder(dir_folder)
         elif ask == '2':
             find_folder(dir_folder)
         elif ask == '3':
             create_file(dir_folder)
+        elif ask == '4':
+            delete_folder(dir_folder)
         
-
 main()

@@ -123,6 +123,9 @@ def create_file(dir_folder):
 
 
 def delete_folder(dir_folder):
+
+
+    
     print(dir_folder)
 
     dir_list = os.listdir(dir_folder)
@@ -158,8 +161,9 @@ def main():
         "3": "create file",
         "4": "delete folder"
     }
-    get_list(options)
     while True:
+        print()
+        get_list(options)
         ask = input('press (1) new folder | press (2) find folder | press (3) new file | press (4) delete folder: ').lower().strip()
         if ask == '1':
             add_folder(dir_folder)

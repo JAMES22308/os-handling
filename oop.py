@@ -4,8 +4,6 @@ def display_list(options):
     for key, value in options.items():
         print(f"{key}: {value}")
 
-
-
 def get_data(json_file):
     while True:
         id_found = False
@@ -37,14 +35,13 @@ def get_data(json_file):
                 else:
                     print('alpha only')
         
-
 def add_entry(json_file):
     with open(json_file, 'r')as file:
         content = file.read()
     data = []
     new_entry = False
     if not content:
-        with open(json_file, 'w')as file:
+        with open(json_file, 'w')as file: 
             json.dump(data, file, indent=4)
     else:
         new_entry = True
@@ -59,7 +56,6 @@ def add_entry(json_file):
         print('first entry was successfully saved')   
     else:
         print('new entry was successfully saved') 
-
 
 def find_entry(json_file):
     try:
@@ -92,33 +88,36 @@ def find_entry(json_file):
     except json.decoder.JSONDecodeError:
         print('no entry in database yet')
             
-        
 def delete_entry(json_file):
     try:
         with open(json_file, 'r')as file:
             content = json.load(file)
-        new_list = []
-        deleted = False
-        ask = input('enter id or name: ')
-        for person in content:
-            if ask != person['id'] and ask != person['name']:
-                new_list.append(person)
-                with open(json_file, 'w')as file:
-                    json.dump(new_list, file, indent=4)
+        option = input('press 1 to delete a person | press 2 to delete everything: ')
+        if option == '1':
+            new_list = []
+            deleted = False
+            ask = input('enter id or name: ')
+            for person in content:
+                if ask != person['id'] and ask != person['name']:
+                    new_list.append(person)
+                    with open(json_file, 'w')as file:
+                        json.dump(new_list, file, indent=4)
+                else:
+                    deleted = True
+            if deleted:
+                print('deleted successfully')
             else:
-                deleted = True
-
-        if deleted:
-            print('deleted successfully')
-        else:
-            print('id not existing')
+                print('id not existing')
+        elif option == '2':
+            
+            with open(json_file, 'w')as file:
+                file.write("")
+                print('everything has been deleted')
     except json.decoder.JSONDecodeError:
         print('no entry in database yet')
 
-
 def edit_entry(json_file):
     try:
-
         with open(json_file, 'r')as file:
             content = json.load(file)
         found = False
@@ -139,14 +138,12 @@ def edit_entry(json_file):
                             print('digit only')
                 else:
                     print('alpha only')
-
         if found:
             with open(json_file, 'w')as file:
                 json.dump(content, file, indent=4)
                 print('entry has been changed')
     except json.decoder.JSONDecodeError:
         print('no entry in database yet')
-
 
 def main():
     json_file = 'oop.json'

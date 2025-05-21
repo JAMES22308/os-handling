@@ -25,5 +25,3 @@ class Aircraft:
 plane = Aircraft('plane', 5)
 plane.add('james', 22)
 plane.add('james', 28)
-print
-        
